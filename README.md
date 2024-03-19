@@ -14,3 +14,7 @@
 ![圖](https://github.com/41071119H-Irene/eduproject/assets/112916890/d7f9c428-d8e3-4d8b-98a3-04603a591b46)
 
 ### 0314
+- 發想介面、分割任務
+![image](https://github.com/41071119H-Irene/eduproject/assets/112916890/946048da-ab20-4b12-8da0-fd1582bcbf08)
+
+- 本週任務: 在本地跑出對話框存資料進csv
