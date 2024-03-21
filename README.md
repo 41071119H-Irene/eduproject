@@ -18,3 +18,6 @@
 ![image](https://github.com/41071119H-Irene/eduproject/assets/112916890/946048da-ab20-4b12-8da0-fd1582bcbf08)
 
 - 本週任務: 在本地跑出對話框存資料進csv
+成果:
+- [by Input Commend](https://github.com/41071119H-Irene/eduproject/blob/main/%E8%B3%87%E6%96%99%E8%BC%B8%E5%85%A5MVP/Data%20Input%20MVP_by%20input%20command.ipynb)
+- [by Gradio(Fail)](https://github.com/41071119H-Irene/eduproject/blob/main/%E8%B3%87%E6%96%99%E8%BC%B8%E5%85%A5MVP/Data%20Input%20MVP_by%20Gadio.ipynb)
