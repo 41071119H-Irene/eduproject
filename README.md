@@ -21,3 +21,6 @@
 成果:
 - [by Input Commend](https://github.com/41071119H-Irene/eduproject/blob/main/%E8%B3%87%E6%96%99%E8%BC%B8%E5%85%A5MVP/Data%20Input%20MVP_by%20input%20command.ipynb)
 - [by Gradio(Fail)](https://github.com/41071119H-Irene/eduproject/blob/main/%E8%B3%87%E6%96%99%E8%BC%B8%E5%85%A5MVP/Data%20Input%20MVP_by%20Gadio.ipynb)
+
+### 0321
+- 從 Gradio 改用 Flask
