@@ -19,8 +19,11 @@
 
 - 本週任務: 在本地跑出對話框存資料進csv
 成果:
-- [by Input Commend](https://github.com/41071119H-Irene/eduproject/blob/main/%E8%B3%87%E6%96%99%E8%BC%B8%E5%85%A5MVP/Data%20Input%20MVP_by%20input%20command.ipynb)
+- [by Input Commend(Succeed)](https://github.com/41071119H-Irene/eduproject/blob/main/%E8%B3%87%E6%96%99%E8%BC%B8%E5%85%A5MVP/Data%20Input%20MVP_by%20input%20command.ipynb)
 - [by Gradio(Fail)](https://github.com/41071119H-Irene/eduproject/blob/main/%E8%B3%87%E6%96%99%E8%BC%B8%E5%85%A5MVP/Data%20Input%20MVP_by%20Gadio.ipynb)
+- Gradio Fail: 有介面，但沒功能
+- ![image](https://github.com/41071119H-Irene/eduproject/assets/112916890/32830ba1-dc83-455e-aac0-f3448230c740)
+
 
 ### 0321
 - 從 Gradio 改用 Flask
