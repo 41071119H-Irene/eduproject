@@ -27,3 +27,6 @@
 
 ### 0321
 - 從 Gradio 改用 [Flask](https://github.com/41071119H-Irene/eduproject/tree/main/Flask)
+- 做出輸入並連結前後端
+![image](https://github.com/41071119H-Irene/eduproject/assets/112916890/c58abf30-e0b6-4944-8b81-d7d68048f043)
+
