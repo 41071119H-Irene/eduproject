@@ -26,4 +26,4 @@
 
 
 ### 0321
-- 從 Gradio 改用 Flask
+- 從 Gradio 改用 [Flask](https://github.com/41071119H-Irene/eduproject/tree/main/Flask)
