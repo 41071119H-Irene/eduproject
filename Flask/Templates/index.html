@@ -11,7 +11,59 @@
         <label for="interest">興趣:</label><br>
         <input type="text" id="interest" name="interest"><br>
         <input type="submit" value="提交">
-        <input type="Generate" value="Generate">
     </form>
+
+    <!-- 加载并实时显示 persona.csv 文件的内容 -->
+    <h2>Persona 資料:</h2>
+    <table id="persona_table" border="1">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>興趣</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 这里将用 JavaScript 动态添加 persona 数据 -->
+        </tbody>
+    </table>
+
+    <script>
+        // 使用 AJAX 请求获取 persona 数据
+        window.onload = function() {
+            fetchPersonaData();
+            document.getElementById('submit-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // 阻止表单的默认提交行为
+                const formData = new FormData(event.target);
+                fetch('/submit', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // 在消息区域显示提交成功消息
+                    document.getElementById('message').innerText = data.message;
+                    // 清空表格数据并重新加载 persona 数据
+                    fetchPersonaData();
+                })
+                .catch(error => console.error('Error submitting form:', error));
+            });
+        };
+    
+        function fetchPersonaData() {
+            fetch('/get_persona_data')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('#persona_table tbody');
+                tableBody.innerHTML = ''; // 清空表格数据
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${row['id']}</td><td>${row['標籤']}</td>`; // 使用正确的字段名
+                    tableBody.appendChild(tr);
+                });
+            })
+            .catch(error => console.error('Error fetching persona data:', error));
+        }
+    </script>
+    
 </body>
 </html>

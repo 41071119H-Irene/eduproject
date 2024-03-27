@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 import csv
 import pandas as pd
 from collections import defaultdict
@@ -16,12 +16,26 @@ def index():
 def submit():
     if request.method == 'POST':
         data = request.form.to_dict()
-        with open('persona.csv', 'a', newline='') as csvfile:
+        with open('persona.csv', 'a', newline='', encoding='utf-8') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=data.keys())
             if csvfile.tell() == 0:
                 writer.writeheader()
             writer.writerow(data)
-        return 'Data submitted successfully!'
+        # 返回 JSON 响应以在前端显示成功消息
+        return redirect(url_for('index'))
+
+
+@app.route('/get_persona_data', methods=['GET'])
+def get_persona_data():
+    persona_data = []
+    with open('persona.csv', 'r', encoding='utf-8') as csvfile:
+        csvreader = csv.DictReader(csvfile)
+        for row in csvreader:
+            persona_data.append(row)
+    print("Persona data:", persona_data)  # 在终端输出以检查数据
+    return jsonify(persona_data)
+
+
 
 @app.route('/Generate', methods=['POST'])
 def generate_network_graph():
@@ -78,12 +92,18 @@ def generate_network_graph():
     node_sizes = [100 * T.degree(node) for node in T.nodes()]
     pos = nx.spring_layout(T, k=0.15, iterations=40)
 
-    plt.figure(figsize=(30, 30))
+    plt.figure(figsize=(8, 6))
     nx.draw_networkx_edges(T, pos, alpha=0.5)
     nx.draw_networkx_nodes(T, pos, node_color=values, node_size=node_sizes, cmap=plt.cm.jet)
-    nx.draw_networkx_labels(T, pos, font_size=20, font_family='SimSun')
+    nx.draw_networkx_labels(T, pos, font_size=10, font_family='SimSun')
     plt.axis('off')
-    plt.show()
+    
+    # Save the generated graph to a file
+    graph_filename = 'static/graph.png'
+    plt.savefig(graph_filename)
+    
+    # Return the filename to be displayed on the frontend
+    return jsonify({"graph_filename": graph_filename})
 
 if __name__ == '__main__':
     app.run(debug=True)
