@@ -12,7 +12,11 @@
         <input type="text" id="interest" name="interest"><br>
         <input type="submit" value="提交">
     </form>
-
+    
+    <div id="network-graph">
+        <img id="graph-image" src="static/placeholder.png" alt="Network Graph">
+    </div>
+    
     <!-- 加载并实时显示 persona.csv 文件的内容 -->
     <h2>Persona 資料:</h2>
     <table id="persona_table" border="1">
@@ -26,11 +30,13 @@
             <!-- 这里将用 JavaScript 动态添加 persona 数据 -->
         </tbody>
     </table>
+    
 
     <script>
         // 使用 AJAX 请求获取 persona 数据
         window.onload = function() {
             fetchPersonaData();
+            updateNetworkGraph(); // 在页面加载时调用生成连接图函数
             document.getElementById('submit-form').addEventListener('submit', function(event) {
                 event.preventDefault(); // 阻止表单的默认提交行为
                 const formData = new FormData(event.target);
@@ -63,6 +69,19 @@
             })
             .catch(error => console.error('Error fetching persona data:', error));
         }
+        
+        function updateNetworkGraph() {
+            fetch('/generate_network_graph', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                const graphImage = document.getElementById('graph-image');
+                graphImage.src = 'data:image/png;base64,' + data.graph_data; // 使用 Base64 编码的图像数据
+            })
+            .catch(error => console.error('Error updating network graph:', error));
+        }
+                
     </script>
     
 </body>

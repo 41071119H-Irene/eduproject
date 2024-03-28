@@ -5,6 +5,8 @@ from collections import defaultdict
 import networkx as nx
 import matplotlib.pyplot as plt
 from community import community_louvain
+import io
+import base64
 
 app = Flask(__name__)
 
@@ -37,7 +39,7 @@ def get_persona_data():
 
 
 
-@app.route('/Generate', methods=['POST'])
+@app.route('/generate_network_graph', methods=['POST'])
 def generate_network_graph():
     # Load persona CSV file
     df = pd.read_csv('persona.csv')
@@ -55,7 +57,7 @@ def generate_network_graph():
             keyword_to_ids[keyword].append(id)
 
     # Load index CSV file
-    dic_df = pd.read_csv("index.csv")
+    dic_df = pd.read_csv("index2.csv")
     key_to_index = defaultdict(list)
 
     for index, row in dic_df.iterrows():
@@ -90,7 +92,10 @@ def generate_network_graph():
     community_colors = {node: partition[node] for node in T.nodes()}
     values = [community_colors[node] for node in T.nodes()]
     node_sizes = [100 * T.degree(node) for node in T.nodes()]
-    pos = nx.spring_layout(T, k=0.15, iterations=40)
+    pos = nx.spring_layout(T, k=1.5, iterations=500)
+
+    import matplotlib
+    matplotlib.use('Agg')
 
     plt.figure(figsize=(8, 6))
     nx.draw_networkx_edges(T, pos, alpha=0.5)
@@ -99,11 +104,13 @@ def generate_network_graph():
     plt.axis('off')
     
     # Save the generated graph to a file
-    graph_filename = 'static/graph.png'
-    plt.savefig(graph_filename)
+    img_data = io.BytesIO()
+    plt.savefig(img_data, format='png')
+    img_data.seek(0)
+    img_base64 = base64.b64encode(img_data.getvalue()).decode('utf-8')
     
-    # Return the filename to be displayed on the frontend
-    return jsonify({"graph_filename": graph_filename})
+    # Return the Base64 encoded image string
+    return jsonify({"graph_data": img_base64})
 
 if __name__ == '__main__':
     app.run(debug=True)
