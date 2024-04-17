@@ -1,6 +1,6 @@
 # 112-2 教育大數據專題製作 - 連結圖
 > Irene Chang
-> 擔任平台建置的 Mentor
+> 擔任連結圖平台建置的 Mentor
 ## 實作Task
 ### 0229
 - making data of next class
